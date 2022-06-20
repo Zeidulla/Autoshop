@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add autopart</title>
+</head>
+
+<body>
+
+<div>
+    <p>
+        <a th:href="@{/}">Домашняя страница</a>
+        <a th:href="@{/seller}">На главную</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </p>
+</div>
+
+<form action="#" th:action="@{/seller/add_part}" th:object="${part}" enctype="multipart/form-data" method="post">
+    Название товара:
+    <div>
+        <input type="text" th:field="*{name}"/>
+    </div>
+
+    Цена товара:
+    <div>
+        <input type="number" th:field="*{price}"/>
+    </div>
+
+    Категория товара:
+    <div>
+        <input type="text" th:field="*{category}"/>
+    </div>
+
+    Общее количество товара:
+    <div>
+        <input type="number" th:field="*{totalQuantity}"/>
+    </div>
+
+    <br>
+    Загрузить картинку запчасти:
+    <div>
+        <input type="file" name="file">
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <input type="submit" value="Добавить товар">
+    </div>
+</form>
+
+</body>
+
+</html>

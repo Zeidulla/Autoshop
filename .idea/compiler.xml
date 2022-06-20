@@ -6,13 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AutoPartsStore" />
+        <module name="autopart-store" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="AutoPartsStore" options="-parameters" />
+      <module name="autopart-store" options="-parameters" />
     </option>
   </component>
 </project>

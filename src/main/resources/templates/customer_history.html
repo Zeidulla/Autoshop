@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Checkouted orders</title>
+    <style>
+   .outline {
+    border: 1px solid black;
+    padding: 0 10px;
+   }
+
+    </style>
+</head>
+
+<body>
+
+<div>
+    <p>
+        <a th:href="@{/customer}">На главную</a>
+        <a th:href="@{/customer/cart}">Корзина</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </p>
+</div>
+
+<div>
+    <h1>Завершенные заказы:</h1>
+
+    <div th:if="${orders.empty}">
+        <div>У Вас нет завершенных товаров</div>
+    </div>
+
+    <div th:unless="${orders.empty}">
+        <div class="outline" th:each="order:${orders}">
+            <div>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Категория</th>
+                        <th>Цена за шт.</th>
+                        <th>Количество</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="position : ${order.positions}">
+                        <td><span th:text="${position.autoPart.name}">Товар</span></td>
+                        <td><span th:text="${position.autoPart.category}">Категория</span></td>
+                        <td><span th:text="|${position.autoPart.price} руб.|">Цена за шт.</span></td>
+                        <td><span th:text="|${position.quantity} шт.|">Количество</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <p th:text="|Сумма заказа: ${order.totalPrice} руб.|"></p>
+                <p th:text="|Дата заказа: ${order.updatingDate}|"></p>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

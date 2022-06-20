@@ -3,6 +3,7 @@ package com.online.auto.parts.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,15 +22,21 @@ public class Order {
     @Column(name = "updating")
     private LocalDateTime updatingDate;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderPosition> positions;
 
-    @OneToOne(mappedBy = "order")
-    private ShoppingCart shoppingCart;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User user;
+
+    @Transient
+    private double totalPrice;
 
     public Order() {
+        creationDate = LocalDateTime.now();
+        updatingDate = LocalDateTime.now();
+        positions = new HashSet<>();
+        status = OrderStatus.NEW;
     }
-
 
     public Order(OrderStatus status, LocalDateTime creationDate, LocalDateTime updatingDate) {
         this.status = status;
@@ -38,16 +45,9 @@ public class Order {
         this.positions = new HashSet<>();
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
     public void addOrderPosition(OrderPosition orderPosition) {
         positions.add(orderPosition);
+        orderPosition.setOrder(this);
     }
 
     public Set<OrderPosition> getPositions() {
@@ -88,5 +88,42 @@ public class Order {
 
     public void setUpdatingDate(LocalDateTime updatingDate) {
         this.updatingDate = updatingDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        user.addOrder(this);
+    }
+
+    public double getTotalPrice() {
+        this.totalPrice = positions.stream().map(s -> s.getQuantity() * s.getAutoPart().getPrice()).reduce(0.0, (a, b) -> a + b);
+        return totalPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return status == order.status && creationDate.equals(order.creationDate) && Objects.equals(user, order.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(status, creationDate, user);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "status=" + status +
+                ", creationDate=" + creationDate +
+                ", updatingDate=" + updatingDate +
+                ", positions=" + positions +
+                '}';
     }
 }

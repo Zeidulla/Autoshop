@@ -14,4 +14,12 @@ public class OrderPositionService {
         repo.save(orderPosition);
     }
 
+    public OrderPosition findById(Long id) {
+        return repo.findById(id).get();
+    }
+
+    public void remove(Long id) {
+        repo.deleteById(id);
+    }
+
 }

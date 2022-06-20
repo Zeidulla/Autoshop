@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Autopart page</title>
+</head>
+
+<body>
+
+<div>
+    <p>
+        <a th:href="@{/customer}">На главную</a>
+        <a th:href="@{/customer/cart}">Корзина</a>
+        <a th:href="@{/customer/history}">История покупок</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </p>
+</div>
+
+<div class="outline">
+    <h1>Информация о товаре:</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Категория</th>
+            <th>Цена за шт.</th>
+            <th>Количество на складе</th>
+            <th>Продавец</th>
+            <th>Контакты</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <td><span th:text="${part.name}">Товар</span></td>
+        <td><span th:text="${part.category}">Категория</span></td>
+        <td><span th:text="|${part.price} руб.|">Цена</span></td>
+        <td><span th:text="|${part.totalQuantity} шт.|">Количество на складе</span></td>
+        <td><span th:text="${part.owner.name}">Продавец</span></td>
+        <td><span th:text="${part.owner.email}">Контакты</span></td>
+        </tbody>
+    </table>
+
+    <img src="/not_found.png" th:src="|/customer/${part.pathToPicture}|" width="600"/>
+
+</div>
+
+
+</body>
+</html>

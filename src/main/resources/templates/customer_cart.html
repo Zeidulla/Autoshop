@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Customer page</title>
+</head>
+
+<body>
+
+<div>
+    <p>
+        <a th:href="@{/customer}">На главную</a>
+        <a th:href="@{/customer/history}">История покупок</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </p>
+</div>
+
+<div>
+    <h1>Товары в корзине:</h1>
+
+    <div th:if="${positions.empty}">
+        <div>Корзина пуста</div>
+    </div>
+
+    <div th:unless="${positions.empty}">
+        <div>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Категория</th>
+                    <th>Цена за шт.</th>
+                    <th>Количество</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="position : ${positions}">
+                    <td><span th:text="${position.autoPart.name}">Товар</span></td>
+                    <td><span th:text="${position.autoPart.category}">Категория</span></td>
+                    <td><span th:text="|${position.autoPart.price} руб.|">Цена за шт.</span></td>
+                    <td><span th:text="|${position.quantity} шт.|">Количество</span></td>
+                    <td><a th:href="@{/customer/position/inc/{id}(id=${position.id})}">Добавить</a></td>
+                    <td><a th:href="@{/customer/position/dec/{id}(id=${position.id})}">Убрать</a></td>
+                    <td><a th:href="@{/customer/position/delete/{id}(id=${position.id})}">Удалить</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <p th:text="|Сумма заказа: ${price} руб.|"></p>
+        </div>
+
+        <div>
+            <form th:action="@{/customer/checkout}">
+                <button type="submit">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

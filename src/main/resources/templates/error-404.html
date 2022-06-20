@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:replace="header :: content"></div>
+<th:block layout:fragment="content">
+    <h1>Page not found</h1>
+    <a href="/">Go Home</a>
+</th:block>
+
+</body>
+</html>

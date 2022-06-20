@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Seller page</title>
+</head>
+
+<body>
+
+<div>
+    <p>
+        <a th:href="@{/seller/add_part}">Добавить товар</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </p>
+</div>
+
+<p th:text="|${user.name}, добро пожаловать в личный кабинет продавца!|"></p>
+
+<div>
+    <h1>Список запчастей на продажу:</h1>
+
+    <div th:if="${user.autoParts.empty}">
+        <div>У вас нет запчастей на продажу</div>
+    </div>
+
+    <div th:unless="${user.autoParts.empty}">
+
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Категория</th>
+                <th>Цена за шт.</th>
+                <th>Оставшееся количество</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="part:${user.autoParts}">
+                <td><span th:text="${part.name}">Товар</span></td>
+                <td><span th:text="${part.category}">Категория</span></td>
+                <td><span th:text="|${part.price} руб.|">Цена</span></td>
+                <td><span th:text="|${part.totalQuantity} шт.|">Количество на складе</span></td>
+                <td><a th:href="@{/seller/update/{id}(id=${part.id})}">Редактировать</a></td>
+                <td><a th:href="@{/seller/delete/{id}(id=${part.id})}">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

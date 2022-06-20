@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update autopart</title>
+</head>
+
+<body>
+
+<div>
+    <p>
+        <a th:href="@{/}">Домашняя страница</a>
+        <a th:href="@{/seller}">На главную</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </p>
+</div>
+
+<form action="#" th:action="@{/seller/update_part/{id}(id=${part.id})}" th:object="${part}" method="post">
+    Название товара:
+    <div>
+        <input type="text" th:field="*{name}"/>
+    </div>
+    Цена товара:
+    <div>
+        <input type="number" th:field="*{price}"/>
+    </div>
+
+    Категория товара:
+    <div>
+        <input type="text" th:field="*{category}"/>
+    </div>
+
+    Общее количество товара:
+    <div>
+        <input type="number" th:field="*{totalQuantity}"/>
+    </div>
+
+    <div>
+        <input type="submit" value="Редактировать">
+    </div>
+</form>
+
+</body>
+
+</html>

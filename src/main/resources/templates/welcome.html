@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+
+<body>
+<div>
+    <a th:href="@{/login}">Войти</a>
+    <a th:href="@{/registration}">Регистрация</a>
+</div>
+
+<p th:text="|Добро пожаловать в ${@environment.getProperty('shop.name')} - магазин автозапчастей!|"></p>
+
+</body>
+
+</html>
+
+</html>

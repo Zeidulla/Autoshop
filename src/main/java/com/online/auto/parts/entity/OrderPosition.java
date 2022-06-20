@@ -1,14 +1,10 @@
 package com.online.auto.parts.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-/**
- * Класс отвечающий за одну позицию в заказе
- *
- * @see Order
- */
 @Entity
-@Table(name = "order_position")
+@Table(name = "order_positions")
 public class OrderPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,10 +13,10 @@ public class OrderPosition {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private AutoPart autoPart;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Order order;
 
     public OrderPosition() {
@@ -29,7 +25,6 @@ public class OrderPosition {
     public OrderPosition(Integer quantity, AutoPart autoPart) {
         this.quantity = quantity;
         this.autoPart = autoPart;
-        autoPart.addPosition(this);
     }
 
     public Long getId() {
@@ -64,4 +59,24 @@ public class OrderPosition {
         this.autoPart = autoPart;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderPosition that = (OrderPosition) o;
+        return Objects.equals(autoPart, that.autoPart) && Objects.equals(order, that.order);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(autoPart, order);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderPosition{" +
+                "quantity=" + quantity +
+                ", autoPart=" + autoPart +
+                '}';
+    }
 }
