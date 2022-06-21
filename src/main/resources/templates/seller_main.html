@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Seller page</title>
+    <style>
+        .reg{
+        width: auto;
+        font-size: 20px;
+        padding: 6px 30px 6px 30px;
+        color: white;
+        background-color: #0e852a;
+}
+.textR{
+    font-weight: bold ;
+    height: 140px;
+    font-size: 20px;
+    width: auto;
+    border-bottom: white;
+}
+</style>
 </head>
 
 <body>
 
-<div>
+<div class="reg">
     <p>
         <a th:href="@{/seller/add_part}">Добавить товар</a>
         <a th:href="@{/logout}">Выйти</a>

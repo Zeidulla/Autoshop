@@ -4,16 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
+    <style>
+        .reg{
+        width: auto;
+        font-size: 20px;
+        padding: 22px 30px 22px 30px;
+        color: white;
+        background-color: #0e852a;
+}
+.textR{
+    font-weight: bold ;
+    height: 140px;
+    font-size: 20px;
+    width: auto;
+    border-bottom: white;
+        text-align: center;
+    margin-top: 5px;
+}
+</style>
 </head>
 
 <body>
-<div>
+<div class="reg">
     <a th:href="@{/login}">Войти</a>
     <a th:href="@{/registration}">Регистрация</a>
 </div>
-
+<div class="textR">
 <p th:text="|Добро пожаловать в ${@environment.getProperty('shop.name')} - магазин автозапчастей!|"></p>
 
+    <figure>  <img src="https://sun9-2.userapi.com/impg/iwleWWQuI2QaKIrEQJCGbjZNlv0dooznGXQD4Q/yHaRrC3oWFY.jpg?size=1873x905&quality=95&sign=1669b54bdcc46d797465e6711879929d&type=album" alt="Autopartsicon" width="100%" height="100%"></figure>
+</div>
 </body>
 
 </html>

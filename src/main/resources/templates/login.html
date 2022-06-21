@@ -4,32 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        .reg{
+        width: auto;
+        font-size: 20px;
+        padding: 6px 30px 6px 30px;
+        color: white;
+        background-color: #0e852a;
+}
+.inputR{
+    width: 319px;
+    margin-left: auto;
+}
+.polya{
+    width: 250px;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+    }
+    .polya input{
+    height: 30px;
+    width: 250px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    outline: none;
+    border:  1px double #0e852a;
+}
+
+.formReg{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    background-color: #ffffff;
+    border:  1px double #0e852a;
+    margin-top: 50px;
+}
+.polya input.switchRole{
+    width: 15px;
+    height: auto;
+}
+.reginaBut{
+    width: 300px;
+    margin-top: 30px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin:5px auto;
+    color: #0e852a;
+}
+</style>
 </head>
 
 <body>
 
-<div>
+<div class="reg">
     <p>
         <a th:href="@{/}">Домашняя страница</a>
     </p>
 </div>
 
-<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+<form class="formReg" th:action="@{/login}" th:object="${user}" method="post">
+    <div class="polya">
     <p th:if="${param.error}" class="error">Wrong user or password.</p>
     <p th:if="${param.logout}" class="error">You have been logged out.</p>
-    Login:
-    <div>
-        <input type="text" th:field="*{username}"/>
-    </div>
-    Password:
-    <div>
-        <input type="password" th:field="*{password}"/>
+
+        <div class="inputR">
+        <input type="text" th:field="*{username}" placeholder="Name" required/>
     </div>
 
-    <div>
+        <div class="inputR">
+        <input type="password" th:field="*{password}" placeholder="Password" required/>
+    </div>
+
+        <div class="reginaBut">
         <input type="submit" value="Login">
     </div>
-
+    </div>
 </form>
 
 </body>

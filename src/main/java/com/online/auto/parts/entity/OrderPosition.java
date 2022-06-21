@@ -3,6 +3,9 @@ package com.online.auto.parts.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
+
+ //Класс отвечающий за одну позицию в заказе
+
 @Entity
 @Table(name = "order_positions")
 public class OrderPosition {

@@ -5,11 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer page</title>
+    <style>
+    .outline {
+    border: 1px solid black;
+    padding: 0 10px;
+    color:black;
+    background-color: #D3D3D3;
+   }
+        .reg{
+        width: auto;
+        font-size: 20px;
+        padding: 6px 30px 6px 30px;
+        color: white;
+        background-color: #0e852a;
+}
+.textR{
+    font-weight: bold ;
+    height: 140px;
+    font-size: 20px;
+    width: auto;
+    border-bottom: white;
+}
+</style>
 </head>
 
 <body>
 
-<div>
+<div class="reg">
     <p>
         <a th:href="@{/customer}">На главную</a>
         <a th:href="@{/customer/history}">История покупок</a>
@@ -17,7 +39,7 @@
     </p>
 </div>
 
-<div>
+<div class="textR">
     <h1>Товары в корзине:</h1>
 
     <div th:if="${positions.empty}">
